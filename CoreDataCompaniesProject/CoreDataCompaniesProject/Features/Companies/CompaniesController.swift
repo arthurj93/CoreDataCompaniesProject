@@ -6,14 +6,11 @@
 //
 
 import UIKit
+import CoreData
 
 class CompaniesController: UITableViewController {
 
-    var companies: [Company] = [
-        Company(name: "Apple", founded: Date()),
-        Company(name: "Google", founded: Date()),
-        Company(name: "Facebook", founded: Date())
-    ]
+    var companies: [Company] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,11 +31,28 @@ class CompaniesController: UITableViewController {
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(handleAddCompany))
+        fetchCompanies()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.sizeToFit()
+    }
+
+    private func fetchCompanies() {
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+
+        let fetchRequest = NSFetchRequest<Company>(entityName: "Company")
+        do {
+            let companies = try context.fetch(fetchRequest)
+            companies.forEach { company in
+                print(company.name ?? "")
+            }
+            self.companies = companies
+            self.tableView.reloadData()
+        } catch let fetchErr {
+            print("Failed to fetch companies:", fetchErr)
+        }
     }
 
     @objc func handleAddCompany() {
@@ -49,6 +63,14 @@ class CompaniesController: UITableViewController {
         present(navController, animated: true, completion: nil)
     }
 
+    let eddHandler: UIContextualAction.Handler = { action, view, completion in
+        completion(true)
+
+    }
+}
+
+extension CompaniesController {
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return companies.count
     }
@@ -58,8 +80,16 @@ class CompaniesController: UITableViewController {
         cell.backgroundColor = AppColors.teal
 
         let company = companies[indexPath.row]
-
-        cell.textLabel?.text = company.name
+        if let name = company.name, let founded = company.founded {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM dd, yyyy"
+//            let locale = Locale(identifier: "EN")
+            let foundedDateString = dateFormatter.string(from: founded)
+            let dateString = "\(name) - Founded : \(foundedDateString)"
+            cell.textLabel?.text = dateString
+        } else {
+            cell.textLabel?.text = company.name
+        }
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         return cell
@@ -74,6 +104,45 @@ class CompaniesController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }
+
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = deleteHandlerAction(indexPath: indexPath)
+        let editAction = editHandlerFunction(indexPath: indexPath)
+        let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+        return swipeActions
+    }
+
+    private func deleteHandlerAction(indexPath: IndexPath) -> UIContextualAction {
+
+        let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (_, _, boolValue) in
+            let company = self.companies[indexPath.row]
+            self.companies.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            let context = CoreDataManager.shared.persistentContainer.viewContext
+            context.delete(company)
+            do {
+                try context.save()
+            } catch let saveError {
+                print("Failed to delete company: ", saveError)
+            }
+        }
+        deleteAction.backgroundColor = AppColors.lightRed
+        return deleteAction
+    }
+
+    private func editHandlerFunction(indexPath: IndexPath) -> UIContextualAction {
+        let editAction = UIContextualAction(style: .normal, title: "Edit") { (_, _, boolValue) in
+            let company = self.companies[indexPath.row]
+            let editCompanyController = CreateCompanyController()
+            editCompanyController.delegate = self
+            editCompanyController.company = company
+            let navController = CustomNavigationController(rootViewController: editCompanyController)
+            navController.modalPresentationStyle = .fullScreen
+            self.present(navController, animated: true, completion: nil)
+        }
+        editAction.backgroundColor = AppColors.darkBlue
+        return editAction
+    }
 }
 
 extension CompaniesController: CreateCompanyControllerDelegate {
@@ -81,5 +150,11 @@ extension CompaniesController: CreateCompanyControllerDelegate {
         companies.append(company)
         let newIndexPath = IndexPath(row: companies.count - 1, section: 0)
         tableView.insertRows(at: [newIndexPath], with: .automatic)
+    }
+
+    func didEditCompany(company: Company) {
+        guard let row = companies.firstIndex(of: company) else { return }
+        let reloadIndexPath = IndexPath(row: row, section: 0)
+        tableView.reloadRows(at: [reloadIndexPath], with: .middle)
     }
 }

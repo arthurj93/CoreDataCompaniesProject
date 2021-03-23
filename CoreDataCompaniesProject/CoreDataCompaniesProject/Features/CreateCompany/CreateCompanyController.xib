@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateCompanyController" customModule="CoreDataCompaniesProject" customModuleProvider="target">
             <connections>
                 <outlet property="backgroundView" destination="djw-xE-3kS" id="mMa-xT-UO6"/>
+                <outlet property="datePicker" destination="wmw-Gd-BcR" id="1Dt-aD-1Cq"/>
                 <outlet property="nameTextField" destination="vNS-rz-PW6" id="dTs-ve-WZY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -39,12 +40,18 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
+                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="wmw-Gd-BcR">
+                            <rect key="frame" x="0.0" y="84" width="414" height="216"/>
+                        </datePicker>
                     </subviews>
                     <color key="backgroundColor" name="lightBlue"/>
                     <constraints>
                         <constraint firstItem="vNS-rz-PW6" firstAttribute="top" secondItem="1Cj-rP-9Yt" secondAttribute="top" id="4I0-Tj-OeI"/>
+                        <constraint firstAttribute="bottom" secondItem="wmw-Gd-BcR" secondAttribute="bottom" id="5Vl-oM-tca"/>
                         <constraint firstItem="1Cj-rP-9Yt" firstAttribute="leading" secondItem="djw-xE-3kS" secondAttribute="leading" constant="16" id="76q-Qs-YI3"/>
+                        <constraint firstAttribute="trailing" secondItem="wmw-Gd-BcR" secondAttribute="trailing" id="NOT-BN-Tdi"/>
                         <constraint firstAttribute="height" constant="300" id="Ofh-7T-339"/>
+                        <constraint firstItem="wmw-Gd-BcR" firstAttribute="leading" secondItem="djw-xE-3kS" secondAttribute="leading" id="VMP-yb-1Ai"/>
                         <constraint firstItem="vNS-rz-PW6" firstAttribute="leading" secondItem="1Cj-rP-9Yt" secondAttribute="trailing" id="ask-6P-by6"/>
                         <constraint firstItem="1Cj-rP-9Yt" firstAttribute="top" secondItem="djw-xE-3kS" secondAttribute="top" id="blI-LM-BSA"/>
                         <constraint firstItem="vNS-rz-PW6" firstAttribute="bottom" secondItem="1Cj-rP-9Yt" secondAttribute="bottom" id="dfr-h1-8Ag"/>
