@@ -31,6 +31,7 @@ class CompaniesController: UITableViewController {
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(handleAddCompany))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset))
         fetchCompanies()
     }
 
@@ -55,7 +56,7 @@ class CompaniesController: UITableViewController {
         }
     }
 
-    @objc func handleAddCompany() {
+    @objc private func handleAddCompany() {
         let createCompanyController = CreateCompanyController()
         createCompanyController.delegate = self
         let navController = CustomNavigationController(rootViewController: createCompanyController)
@@ -63,9 +64,23 @@ class CompaniesController: UITableViewController {
         present(navController, animated: true, completion: nil)
     }
 
-    let eddHandler: UIContextualAction.Handler = { action, view, completion in
-        completion(true)
+    @objc private func handleReset() {
+        let context = CoreDataManager.shared.persistentContainer.viewContext
 
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: Company.fetchRequest())
+        do {
+            try context.execute(batchDeleteRequest)
+            var indexPathsToRemove: [IndexPath] = .init()
+            for (index, _) in companies.enumerated() {
+                let indexPath = IndexPath(row: index, section: 0)
+                indexPathsToRemove.append(indexPath)
+            }
+            companies.removeAll()
+            tableView.deleteRows(at: indexPathsToRemove, with: .left)
+            tableView.reloadData()
+        } catch let deleteError {
+            print("Failed to delete: ", deleteError)
+        }
     }
 }
 
@@ -92,6 +107,10 @@ extension CompaniesController {
         }
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        if let imageData = company.imageData {
+            cell.imageView?.image = UIImage(data: imageData)
+        }
+
         return cell
     }
 
@@ -110,6 +129,19 @@ extension CompaniesController {
         let editAction = editHandlerFunction(indexPath: indexPath)
         let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
         return swipeActions
+    }
+
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.text = "No companies avaliable..."
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        return label
+    }
+
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return companies.count == 0 ? 150 : 0
     }
 
     private func deleteHandlerAction(indexPath: IndexPath) -> UIContextualAction {

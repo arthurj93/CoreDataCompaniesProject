@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateCompanyController" customModule="CoreDataCompaniesProject" customModuleProvider="target">
             <connections>
                 <outlet property="backgroundView" destination="djw-xE-3kS" id="mMa-xT-UO6"/>
+                <outlet property="companyImageView" destination="A7R-ib-vlE" id="TLr-Es-qLN"/>
                 <outlet property="datePicker" destination="wmw-Gd-BcR" id="1Dt-aD-1Cq"/>
                 <outlet property="nameTextField" destination="vNS-rz-PW6" id="dTs-ve-WZY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -23,10 +24,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="djw-xE-3kS">
-                    <rect key="frame" x="0.0" y="44" width="414" height="300"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="382"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Cj-rP-9Yt">
-                            <rect key="frame" x="16" y="0.0" width="100" height="50"/>
+                            <rect key="frame" x="16" y="108" width="100" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="C3m-Xz-AhZ"/>
                                 <constraint firstAttribute="width" constant="100" id="rwC-Yc-6y2"/>
@@ -35,25 +36,34 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="wmw-Gd-BcR">
+                            <rect key="frame" x="0.0" y="166" width="414" height="216"/>
+                        </datePicker>
+                        <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="select_photo_empty" translatesAutoresizingMaskIntoConstraints="NO" id="A7R-ib-vlE">
+                            <rect key="frame" x="157" y="8" width="100" height="100"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="100" id="NVa-Ca-Mas"/>
+                                <constraint firstAttribute="width" constant="100" id="PeY-dW-9NW"/>
+                            </constraints>
+                        </imageView>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vNS-rz-PW6">
-                            <rect key="frame" x="116" y="0.0" width="298" height="50"/>
+                            <rect key="frame" x="116" y="108" width="298" height="50"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="wmw-Gd-BcR">
-                            <rect key="frame" x="0.0" y="84" width="414" height="216"/>
-                        </datePicker>
                     </subviews>
                     <color key="backgroundColor" name="lightBlue"/>
                     <constraints>
+                        <constraint firstItem="A7R-ib-vlE" firstAttribute="centerX" secondItem="djw-xE-3kS" secondAttribute="centerX" id="0rk-D2-m57"/>
                         <constraint firstItem="vNS-rz-PW6" firstAttribute="top" secondItem="1Cj-rP-9Yt" secondAttribute="top" id="4I0-Tj-OeI"/>
                         <constraint firstAttribute="bottom" secondItem="wmw-Gd-BcR" secondAttribute="bottom" id="5Vl-oM-tca"/>
+                        <constraint firstItem="A7R-ib-vlE" firstAttribute="top" secondItem="djw-xE-3kS" secondAttribute="top" constant="8" id="6U0-Rd-0Gy"/>
                         <constraint firstItem="1Cj-rP-9Yt" firstAttribute="leading" secondItem="djw-xE-3kS" secondAttribute="leading" constant="16" id="76q-Qs-YI3"/>
+                        <constraint firstItem="1Cj-rP-9Yt" firstAttribute="top" secondItem="A7R-ib-vlE" secondAttribute="bottom" id="Be7-rJ-aFg"/>
                         <constraint firstAttribute="trailing" secondItem="wmw-Gd-BcR" secondAttribute="trailing" id="NOT-BN-Tdi"/>
-                        <constraint firstAttribute="height" constant="300" id="Ofh-7T-339"/>
+                        <constraint firstAttribute="height" constant="382" id="Ofh-7T-339"/>
                         <constraint firstItem="wmw-Gd-BcR" firstAttribute="leading" secondItem="djw-xE-3kS" secondAttribute="leading" id="VMP-yb-1Ai"/>
                         <constraint firstItem="vNS-rz-PW6" firstAttribute="leading" secondItem="1Cj-rP-9Yt" secondAttribute="trailing" id="ask-6P-by6"/>
-                        <constraint firstItem="1Cj-rP-9Yt" firstAttribute="top" secondItem="djw-xE-3kS" secondAttribute="top" id="blI-LM-BSA"/>
                         <constraint firstItem="vNS-rz-PW6" firstAttribute="bottom" secondItem="1Cj-rP-9Yt" secondAttribute="bottom" id="dfr-h1-8Ag"/>
                         <constraint firstAttribute="trailing" secondItem="vNS-rz-PW6" secondAttribute="trailing" id="qy6-9t-h1V"/>
                     </constraints>
@@ -70,6 +80,7 @@
         </view>
     </objects>
     <resources>
+        <image name="select_photo_empty" width="100" height="100"/>
         <namedColor name="lightBlue">
             <color red="0.85490196078431369" green="0.92156862745098034" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
