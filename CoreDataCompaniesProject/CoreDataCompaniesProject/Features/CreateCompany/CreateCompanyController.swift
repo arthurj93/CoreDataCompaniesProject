@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-protocol CreateCompanyControllerDelegate {
+protocol CreateCompanyControllerDelegate: class {
     func didAddCompany(company: Company)
     func didEditCompany(company: Company)
 }
@@ -20,7 +20,7 @@ class CreateCompanyController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var companyImageView: UIImageView!
 
-    var delegate: CreateCompanyControllerDelegate?
+    weak var delegate: CreateCompanyControllerDelegate?
     var company: Company?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +37,7 @@ class CreateCompanyController: UIViewController {
                                title: "",
                                preferredLargeTitle: true)
 
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
+        setupCancelButton()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave))
     }
 
@@ -47,7 +47,6 @@ class CreateCompanyController: UIViewController {
     }
 
     @objc func handleSelectPhoto() {
-        print("teste")
 
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
