@@ -20,7 +20,7 @@ class CreateCompanyController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var companyImageView: UIImageView!
 
-    var delegate: CreateCompanyControllerDelegate?
+    weak var delegate: CreateCompanyControllerDelegate?
     var company: Company?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +47,6 @@ class CreateCompanyController: UIViewController {
     }
 
     @objc func handleSelectPhoto() {
-        print("teste")
 
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self

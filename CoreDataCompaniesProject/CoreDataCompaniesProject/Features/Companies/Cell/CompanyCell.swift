@@ -43,14 +43,13 @@ class CompanyCell: UITableViewCell {
             nameFoundedDateLabel?.text = company?.name
         }
         if let imageData = company?.imageData {
-            companyImageView?.image = UIImage(data: imageData)
+            if imageData.count == 0 {
+                companyImageView?.image = #imageLiteral(resourceName: "select_photo_empty")
+            } else {
+                companyImageView?.image = UIImage(data: imageData)
+            }
+
         }
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
 }
