@@ -82,7 +82,7 @@ struct CoreDataManager {
         let fetchRequest = NSFetchRequest<Employee>(entityName: "Employee")
         do {
             let employees = try context.fetch(fetchRequest)
-            employees.forEach { print("name: \($0.name ?? "")")}
+            employees.forEach { print("name: \($0.fullName ?? "")")}
             completion(.success(employees))
         } catch let fetchError {
             print("Failed to fetch employees: ", fetchError)

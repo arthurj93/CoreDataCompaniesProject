@@ -72,7 +72,7 @@ extension EmployeesController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "xxc") as? UITableViewCell else { return .init() }
         let employee = allEmployees[indexPath.section][indexPath.row]
 
-        cell.textLabel?.text = employee.name
+        cell.textLabel?.text = employee.fullName
 
         if let birthday = employee.employeeInformation?.birthday {
             let dateFormatter = DateFormatter()
@@ -80,7 +80,7 @@ extension EmployeesController {
             //            let locale = Locale(identifier: "EN")
             let foundedDateString = dateFormatter.string(from: birthday)
 //            let dateString = "\(name) - Founded : \(foundedDateString)"
-            cell.textLabel?.text = "\(employee.name ?? "")   \(foundedDateString)"
+            cell.textLabel?.text = "\(employee.fullName ?? "")   \(foundedDateString)"
         }
 //        if let taxId = employee.employeeInformation?.taxId {
 //            cell.textLabel?.text = "\(employee.name ?? "")   \(taxId)"

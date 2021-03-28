@@ -30,6 +30,8 @@
 		5AF6A5DE260C2AC000E32251 /* EmployeesHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF6A5DD260C2AC000E32251 /* EmployeesHeaderView.swift */; };
 		5AF6A5E1260C2AD700E32251 /* EmployeesHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AF6A5E0260C2AD700E32251 /* EmployeesHeaderView.xib */; };
 		5AF6A5E4260C344700E32251 /* EmployeeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF6A5E3260C344700E32251 /* EmployeeType.swift */; };
+		5AF6A6992610FD8700E32251 /* CompaniesAutoUpdateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF6A6982610FD8700E32251 /* CompaniesAutoUpdateController.swift */; };
+		5AF6A69C26112EBB00E32251 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF6A69B26112EBB00E32251 /* Service.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,9 @@
 		5AF6A5DD260C2AC000E32251 /* EmployeesHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesHeaderView.swift; sourceTree = "<group>"; };
 		5AF6A5E0260C2AD700E32251 /* EmployeesHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeesHeaderView.xib; sourceTree = "<group>"; };
 		5AF6A5E3260C344700E32251 /* EmployeeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeType.swift; sourceTree = "<group>"; };
+		5AF6A6982610FD8700E32251 /* CompaniesAutoUpdateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesAutoUpdateController.swift; sourceTree = "<group>"; };
+		5AF6A69B26112EBB00E32251 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		5AF6A69E261137E900E32251 /* CoreDataCompaniesModels_v1.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataCompaniesModels_v1.1.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +105,8 @@
 				5A53FAFC2604049E006CF79A /* Extensions */,
 				5AF0F23026092167004E9FEC /* CoreDataManager.swift */,
 				5A53FBE4260919B2006CF79A /* CoreDataCompaniesModels.xcdatamodeld */,
+				5AF6A6982610FD8700E32251 /* CompaniesAutoUpdateController.swift */,
+				5AF6A69B26112EBB00E32251 /* Service.swift */,
 			);
 			path = CoreDataCompaniesProject;
 			sourceTree = "<group>";
@@ -262,11 +269,13 @@
 				5A53FB0D26040758006CF79A /* UIColor+Extension.swift in Sources */,
 				5A53FAFE260404B5006CF79A /* UIViewController+Extension.swift in Sources */,
 				5AF6A5E4260C344700E32251 /* EmployeeType.swift in Sources */,
+				5AF6A6992610FD8700E32251 /* CompaniesAutoUpdateController.swift in Sources */,
 				5A53FB0926040667006CF79A /* AppColors.swift in Sources */,
 				5A53FAE32603F8C9006CF79A /* SceneDelegate.swift in Sources */,
 				5AF0F2D3260A9F9D004E9FEC /* CompanyCell.swift in Sources */,
 				5AF0F2E4260AB564004E9FEC /* CreateEmployeeController.swift in Sources */,
 				5AF0F2DE260AB31B004E9FEC /* EmployeesController.swift in Sources */,
+				5AF6A69C26112EBB00E32251 /* Service.swift in Sources */,
 				5A53FAF9260400EE006CF79A /* CompaniesController.swift in Sources */,
 				5A53FB2D26041635006CF79A /* CreateCompanyController.swift in Sources */,
 				5AF6A5DE260C2AC000E32251 /* EmployeesHeaderView.swift in Sources */,
@@ -470,9 +479,10 @@
 		5A53FBE4260919B2006CF79A /* CoreDataCompaniesModels.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				5AF6A69E261137E900E32251 /* CoreDataCompaniesModels_v1.1.xcdatamodel */,
 				5A53FBE5260919B2006CF79A /* CoreDataCompaniesModels.xcdatamodel */,
 			);
-			currentVersion = 5A53FBE5260919B2006CF79A /* CoreDataCompaniesModels.xcdatamodel */;
+			currentVersion = 5AF6A69E261137E900E32251 /* CoreDataCompaniesModels_v1.1.xcdatamodel */;
 			path = CoreDataCompaniesModels.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
